@@ -6,5 +6,6 @@ export async function signUp (req, res) {
 }
 
 export async function signIn (req, res) {
-    
+    await db.collection('users').insertOne({name:'emily'});
+    res.send("deu bom")
 }
