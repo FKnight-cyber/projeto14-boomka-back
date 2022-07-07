@@ -6,6 +6,6 @@ import {signUpMiddleware, signInMiddleware} from '../middlewares/authMiddleware.
 const authRouter = Router();
 
 authRouter.post('/sign-up', signUpMiddleware, signUp);
-authRouter.post('/sign-in', signIn);
+authRouter.post('/sign-in', signInMiddleware, signIn);
 
 export default authRouter;
