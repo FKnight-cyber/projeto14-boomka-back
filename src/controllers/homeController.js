@@ -20,6 +20,7 @@ export async function getDailyData(_,res){
 
 export async function getProductData(req,res){
     const { id } = req.params;
+    if(!id) return res.status(422).send({message:"Id inválido"});
     try {
         const product = await db.collection('products').findOne({id: parseInt(id)});
         res.status(200).send(product);
