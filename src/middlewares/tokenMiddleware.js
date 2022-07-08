@@ -19,6 +19,5 @@ export default async function tokenMiddleware(req, res, next) {
   res.locals.session = session;
   res.locals.user = user;
   next();
-  
-  next();
+
 }
