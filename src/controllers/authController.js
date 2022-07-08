@@ -22,8 +22,13 @@ export async function signIn (req, res) {
             userId: user._id,
             token
         });
-        res.send(token)
+        res.send(token).status(201)
     } else {
         res.sendStatus(401)
     }
+}
+
+export async function adress (req, res) {
+    //const {cep, endereço, numero, bairro, cidade } = req.body;
+    res.sendStatus(201)
 }
