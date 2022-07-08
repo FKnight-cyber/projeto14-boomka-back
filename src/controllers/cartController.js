@@ -38,3 +38,14 @@ export async function deleteFromCart(req,res){
         res.status(500).send(error)
     }
 }
+
+export async function cleanCart(_,res){
+    const { token } = res.locals;
+    try {
+        const session = await db.collection('sessions').findOne({token:token});
+        await db.collection('carrinho').deleteMany({userId:session.userId})
+        res.status(200).send("carrinho limpo")
+    }catch(error){
+        res.status(500).send(error)
+    }
+}
