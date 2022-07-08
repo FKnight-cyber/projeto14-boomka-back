@@ -12,4 +12,12 @@ const signInSchema = joi.object({
     password:joi.string().required()
 })
 
-export {signUpSchema, signInSchema}
+const adressSchema = joi.object({
+    cep: joi.string().required(),
+    endereço: joi.string().required(),
+    numero: joi.number().required(),
+    bairro: joi.string().required(),
+    cidade: joi.string().required()
+})
+
+export {signUpSchema, signInSchema, adressSchema}
