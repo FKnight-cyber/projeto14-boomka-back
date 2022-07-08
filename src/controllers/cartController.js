@@ -1,4 +1,4 @@
-export default function insertIntoCart(req,res){
+export async function insertIntoCart(req,res){
     const { inventory } = req.body;
 
     if(inventory === 0) return res.status(422).send({message:"Estoque esgotado!"});
