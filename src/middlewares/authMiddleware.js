@@ -16,8 +16,9 @@ function signInMiddleware(req, res, next) {
 }
 function adressMiddleware(req, res, next) {
     const validation = adressSchema.validate(req.body);
+
     if(validation.error) {
-        return res.sendStatus(422)
+        return res.sendStatus(422);
     }
     next();
 }
