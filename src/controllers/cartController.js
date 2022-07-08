@@ -1,4 +1,4 @@
-import db from "../database/db";
+import db from "../database/db.js";
 
 export async function insertIntoCart(req,res){
     const { id } = req.body;
