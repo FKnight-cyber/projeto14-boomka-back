@@ -39,3 +39,9 @@ export async function sendAdress (req, res) {
     })
     res.sendStatus(201)
 }
+
+export async function getAdress (req, res) {
+    const { user } = res.locals;
+    const adress = await db.collection('adress').findOne({userId: user._id});
+    res.send(adress)
+}

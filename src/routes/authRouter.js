@@ -7,7 +7,7 @@ const authRouter = Router();
 
 authRouter.post('/sign-up', signUpMiddleware, signUp);
 authRouter.post('/sign-in', signInMiddleware, signIn);
-authRouter.post('/adress', adressMiddleware, tokenMiddleware, sendAdress);
-authRouter.get('/adress', getAdress);
+authRouter.post('/adress', tokenMiddleware, adressMiddleware, sendAdress);
+authRouter.get('/adress', tokenMiddleware, getAdress);
 
 export default authRouter;
