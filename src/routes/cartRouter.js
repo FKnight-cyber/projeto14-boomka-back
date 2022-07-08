@@ -5,6 +5,6 @@ const cartRouter = Router();
 
 cartRouter.post("/carrinho",authentication,insertIntoCart);
 cartRouter.get("/carrinho",authentication,getCart);
-cartRouter.delete("/carrinho",authentication,deleteFromCart);
+cartRouter.delete("/carrinho/:id",authentication,deleteFromCart);
 
 export default cartRouter;

@@ -28,7 +28,7 @@ export async function getCart(_,res){
 }
 
 export async function deleteFromCart(req,res){
-    const { id } = req.body;
+    const { id } = req.params;
     const { token } = res.locals;
     try {
         const session = await db.collection('sessions').findOne({token:token});
