@@ -1,9 +1,12 @@
 import { Router } from "express";
-import productSchema from "../schemas/productSchema.js";
-import insertIntoCart from "../controllers/cartController.js";
+
+import { insertIntoCart, getCart,deleteFromCart} from "../controllers/cartController.js";
+import authentication from "../middlewares/authentication.js"
 
 const cartRouter = Router();
 
-cartRouter.post("/carrinho",productSchema,insertIntoCart)
+cartRouter.post("/carrinho",authentication,insertIntoCart);
+cartRouter.get("/carrinho",authentication,getCart);
+cartRouter.delete("/carrinho/:id",authentication,deleteFromCart);
 
 export default cartRouter;
