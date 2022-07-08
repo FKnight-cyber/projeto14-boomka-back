@@ -28,7 +28,14 @@ export async function signIn (req, res) {
     }
 }
 
-export async function adress (req, res) {
-    //const {cep, endereço, numero, bairro, cidade } = req.body;
+export async function sendAdress (req, res) {
+
+    const {user} = res.locals;
+    const adress = req.body;
+
+    await db.collection('adress').insertOne({
+        ...adress,
+        userId: user._id
+    })
     res.sendStatus(201)
 }
