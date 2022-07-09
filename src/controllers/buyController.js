@@ -12,7 +12,7 @@ export async function buy(req,res){
             await db.collection('products').updateOne(product,{$set:{inventory: product.inventory-1}})
         })
 
-        let pedido;
+        let pedido = {};
 
         if(type === 'pix'){
             pedido = {
