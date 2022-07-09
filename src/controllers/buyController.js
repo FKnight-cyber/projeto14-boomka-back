@@ -9,22 +9,12 @@ export async function buy(req,res){
         const user = await db.collection('users').findOne({_id:session.userId});
         const localizacao = await db.collection('adress').findOne({userId:session.userId});
 
-        for(let i = 0;i < cart.length;i++){
-            await db.collection('products').updateOne({id:cart[i].id},{$inc:{inventory: -1}});
-        }
-
         let pedido = {
             email: user.email,
             type,
             value: parseInt(value).toFixed(2),
             compras:cart,
-            address:{
-                rua: localizacao.endereço,
-                numero: localizacao.numero,
-                bairro: localizacao.bairro,
-                cidade:localizacao.cidade,
-                cep:localizacao.cep
-            }
+            address:localizacao
         };
 
         if(type === 'pix'){
@@ -32,6 +22,9 @@ export async function buy(req,res){
         }
         
         await db.collection('pedidos').insertOne(pedido);
+        for(let i = 0;i < cart.length;i++){
+            await db.collection('products').updateOne({id:cart[i].id},{$inc:{inventory: -1}});
+        }
         await db.collection('carrinho').deleteMany({userId:session.userId});
         res.status(201).send({message:"Compra finalizada!"})
     }catch(error){
