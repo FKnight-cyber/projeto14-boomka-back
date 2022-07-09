@@ -7,7 +7,7 @@ export async function buy(req,res){
     try {
         const session = await db.collection('sessions').findOne({token:token});
         const user = await db.collection('users').findOne({_id:session.userId});
-        const localizacao = await db.collection('adress').findOne({_id:session.userId});
+        const localizacao = await db.collection('adress').findOne({userId:session.userId});
 
         for(let i = 0;i < cart.length;i++){
             await db.collection('products').updateOne({id:cart[i].id},{$inc:{inventory: -1}});
@@ -18,7 +18,13 @@ export async function buy(req,res){
             type,
             value: parseInt(value).toFixed(2),
             compras:cart,
-            address:localizacao
+            address:{
+                rua: localizacao.endereço,
+                numero: localizacao.numero,
+                bairro: localizacao.bairro,
+                cidade:localizacao.cidade,
+                cep:localizacao.cep
+            }
         };
 
         if(type === 'pix'){
