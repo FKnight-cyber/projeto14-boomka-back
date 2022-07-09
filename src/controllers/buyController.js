@@ -18,13 +18,7 @@ export async function buy(req,res){
             type,
             value: parseInt(value).toFixed(2),
             compras:cart,
-            address:{
-                rua: localizacao.endereço,
-                numero: localizacao.numero,
-                bairro: localizacao.bairro,
-                cidade:localizacao.cidade,
-                cep:localizacao.cep
-            }
+            address:localizacao
         };
 
         if(type === 'pix'){
