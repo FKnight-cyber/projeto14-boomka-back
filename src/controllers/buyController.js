@@ -8,9 +8,9 @@ export async function buy(req,res){
         const session = await db.collection('sessions').findOne({token:token});
         const user = await db.collection('users').findOne({_id:session.userId});
 
-        cart.forEach(product=>{
+        cart.forEach(product =>
             await db.collection('products').updateOne({id:product.id},{$set:{inventory: product.inventory-1}})
-        })
+        )
 
         let pedido = {};
 
