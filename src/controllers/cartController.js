@@ -9,6 +9,8 @@ export async function insertIntoCart(req,res){
     try {
         const session = await db.collection('sessions').findOne({token:token});
         const product = await db.collection('products').findOne({id:parseInt(id)});
+        const checkProduct = await db.collection('carrinho').findOne({...product, userId:session.userId});
+        if(checkProduct) return res.status(422).send({message:"Esse produto já está no carrinho!"});
         await db.collection('carrinho').insertOne({...product, userId:session.userId});
         res.status(200).send("Produto adicionado ao carrinho!");
     }catch(error){
