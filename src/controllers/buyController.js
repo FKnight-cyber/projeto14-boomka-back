@@ -9,7 +9,7 @@ export async function buy(req,res){
         const user = await db.collection('users').findOne({_id:session.userId});
 
         for(let i = 0;i < cart.length;i++){
-            await db.collection('products').updateOne(cart[i],{$set:{inventory: parseInt(cart[i].inventory)-1}});
+            await db.collection('products').updateOne(cart[i],{$inc:{inventory: -1}});
         }
 
         let pedido = {
