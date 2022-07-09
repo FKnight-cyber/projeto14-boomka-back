@@ -1,5 +1,4 @@
 import db from "../database/db.js";
-import { cleanCart } from "./cartController.js";
 
 export async function buy(req,res){
     const { token } = res.locals;
@@ -13,7 +12,7 @@ export async function buy(req,res){
             await db.collection('products').updateOne(cart[i],{$set:{inventory: parseInt(cart[i].inventory)-1}});
         }
 
-        let pedido = pedido = {
+        let pedido = {
             email: user.email,
             type,
             value: parseInt(value).toFixed(2),
