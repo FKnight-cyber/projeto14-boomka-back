@@ -5,7 +5,7 @@ export async function getMonthlyData(_,res){
         const myproducts = await db.collection('products').find({type: 'monthly'}).toArray();
         res.status(200).send(myproducts);
     }catch(error){
-        res.sendStatus(500);
+        res.status(500).send({message:`${error}`});
     }
 }
 
@@ -14,7 +14,7 @@ export async function getDailyData(_,res){
         const myproducts = await db.collection('products').find({type: 'daily'}).toArray();
         res.status(200).send(myproducts);
     }catch(error){
-        res.sendStatus(500);
+        res.status(500).send({message:`${error}`});
     }
 }
 
@@ -25,7 +25,7 @@ export async function getProductData(req,res){
         const product = await db.collection('products').findOne({id: parseInt(id)});
         res.status(200).send(product);
     }catch(error){
-        res.sendStatus(500);
+        res.status(500).send({message:`${error}`});
     }
 }
 
@@ -33,8 +33,8 @@ export async function insertData(req,res){
     const product = {...req.body, id:Date.now()}
     try {
         await db.collection('products').insertOne(product);
-        res.status(200).send("Produto cadastrado com sucesso!");
+        res.status(200).send({message:"Produto cadastrado com sucesso!"});
     }catch(error){
-        res.sendStatus(500);
+        res.status(500).send({message:`${error}`});
     }
 }

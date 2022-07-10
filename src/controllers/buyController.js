@@ -1,4 +1,5 @@
 import db from "../database/db.js";
+import { stripHtml } from "string-strip-html";
 
 export async function buy(req,res){
     const { token } = res.locals;
@@ -25,7 +26,7 @@ export async function buy(req,res){
         };
 
         if(type === 'pix'){
-            pedido = {...pedido, pixkey:user.email}
+            pedido = {...pedido, pixkey: stripHtml(req.body.pixkey).result}
         }
         
         await db.collection('pedidos').insertOne(pedido);
@@ -35,6 +36,6 @@ export async function buy(req,res){
         await db.collection('carrinho').deleteMany({userId:session.userId});
         res.status(201).send({message:"Compra finalizada!"})
     }catch(error){
-        res.sendStatus(500);
+        res.status(500).send({message:`${error}`});
     }
 }

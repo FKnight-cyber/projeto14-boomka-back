@@ -7,6 +7,7 @@
     "joi": "^17.6.0",
     "mongodb": "^4.7.0",
     "nodemon": "^2.0.19",
+    "string-strip-html": "^10.0.0",
     "uuid": "^8.3.2"
   },
   "name": "projeto14-boomka-back",
