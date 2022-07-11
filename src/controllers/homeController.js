@@ -38,3 +38,11 @@ export async function insertData(req,res){
         res.sendStatus(500);
     }
 }
+
+export async function getMyProduct (req, res) {
+    const {user} = res.locals;
+    
+    const products = await db.collection('products').find({email: user.email}).toArray();
+    
+    res.send(products)
+}
