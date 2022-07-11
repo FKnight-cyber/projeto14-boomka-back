@@ -42,9 +42,13 @@ export async function insertData(req,res){
 export async function getMyProduct (req, res) {
     const {user} = res.locals;
     
-    const products = await db.collection('products').find({email: user.email}).toArray();
-    if(!products) {
-        return res.send('nao deu')
+    try {
+        const products = await db.collection('products').find({email: user.email}).toArray();
+        if(!products) {
+            return res.send('nao deu')
+        }
+        res.send(products)
+    } catch {
+        res.sendStatus(500)
     }
-    res.send(products)
 }
