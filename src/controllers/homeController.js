@@ -43,6 +43,8 @@ export async function getMyProduct (req, res) {
     const {user} = res.locals;
     
     const products = await db.collection('products').find({email: user.email}).toArray();
-    
+    if(!products) {
+        return res.send('nao deu')
+    }
     res.send(products)
 }
