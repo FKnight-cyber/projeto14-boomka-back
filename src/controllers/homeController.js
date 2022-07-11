@@ -43,7 +43,7 @@ export async function getMyProduct (req, res) {
     const {user} = res.locals;
     
     try {
-        const products = await db.collection('products').find({email: user.email}).toArray();
+        const products = await db.collection('pedidos').find({email: user.email}).toArray();
         if(!products) {
             return res.send('nao deu')
         }
