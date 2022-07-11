@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { getDailyData,getMonthlyData,insertData,getProductData, getMyProduct } from "../controllers/homeController.js";
-import authentication from "../middlewares/authentication.js";
 import productSchema from "../schemas/productSchema.js";
 import tokenMiddleware from "../middlewares/tokenMiddleware.js";
 
